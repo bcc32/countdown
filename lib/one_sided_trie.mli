@@ -4,7 +4,9 @@
 
 open Core
 
-type t
+type t [@@deriving sexp]
+
+include Invariant.S with type t := t
 
 (** Create a one-sided trie over the given alphabet *)
 val create : char list -> t

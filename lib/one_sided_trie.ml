@@ -2,9 +2,10 @@ open Core
 
 type t =
   { chars : char list
-  ; children : t Int.Map.t
+  ; children : t Int.Map.t sexp_opaque
   ; values : String.Set.t
   }
+[@@deriving sexp]
 
 let create chars =
   { chars
@@ -12,6 +13,17 @@ let create chars =
   ; values = String.Set.empty
   }
 ;;
+
+let rec invariant t =
+  Invariant.invariant [%here] t sexp_of_t (fun () ->
+    assert (Set.length (Char.Set.of_list t.chars) = List.length t.chars);
+    Map.iter t.children ~f:(fun u ->
+      invariant u;
+      assert (List.equal u.chars (List.tl_exn t.chars) ~equal:Char.equal)
+    );
+    (* TODO encode this in the type *)
+    assert (Map.is_empty t.children || Set.is_empty t.values)
+  )
 
 let rec add t string =
   match t.chars with

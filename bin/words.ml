@@ -11,13 +11,18 @@ let trie_param =
   let%map_open filename = anon ("dictionary-file" %: string) in
   In_channel.with_file filename ~f:(fun chan ->
     Debug.eprint "Constructing index from dictionary file...";
+    let trie =
     In_channel.(fold_lines chan)
       ~init:(One_sided_trie.create letters)
       ~f:(fun trie word ->
         let word = String.lowercase word in
         One_sided_trie.add trie word
       )
-    |> fun x -> Debug.eprint "Done!"; x
+    in
+    Debug.eprint "Checking invariant...";
+    One_sided_trie.invariant trie;
+    Debug.eprint "Done!";
+    trie
   )
 ;;
 
