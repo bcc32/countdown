@@ -29,11 +29,14 @@ let trie_param =
 let main_loop trie =
   In_channel.(iter_lines stdin) ~f:(fun word ->
     let word = String.lowercase word in
-    One_sided_trie.fold trie word
-      ~init:[]
-      ~f:(fun acc word -> word :: acc)
-    |> List.rev
-    |> printf !"%{sexp: string list}\n%!"
+    let by_length_desc = Comparable.lift Int.descending ~f:String.length in
+    let cmp = Comparable.lexicographic [ by_length_desc; String.compare ] in
+    let results =
+      One_sided_trie.to_sequence trie word
+      |> Sequence.to_array
+    in
+    Array.sort results ~cmp;
+    printf !"%{sexp: string array}\n%!" results
   );
 ;;
 
