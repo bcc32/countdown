@@ -1,0 +1,6 @@
+(jbuild_version 1)
+
+(executables
+ ((names (words))
+  (libraries (core countdown_lib))
+  (preprocess (pps (ppx_jane)))))
