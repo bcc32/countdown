@@ -2,5 +2,6 @@
 
 (executables
  ((names (words))
+  (public_names (words))
   (libraries (core countdown_lib))
   (preprocess (pps (ppx_jane)))))

@@ -6,3 +6,4 @@ author: "Aaron L. Zeng <a2z@bcc32.com>"
 homepage: "https://github.com/bcc32/countdown"
 bug-reports: "https://github.com/bcc32/countdown/issues"
 license: "MIT"
+build: [[ "jbuilder" "build" "-p" name "-j" jobs ]]
