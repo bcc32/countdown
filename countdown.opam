@@ -7,3 +7,7 @@ homepage: "https://github.com/bcc32/countdown"
 bug-reports: "https://github.com/bcc32/countdown/issues"
 license: "MIT"
 build: [[ "jbuilder" "build" "-p" name "-j" jobs ]]
+depends: [
+  "core" {build}
+  "core_extended" {build}
+]
