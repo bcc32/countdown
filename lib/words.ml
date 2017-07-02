@@ -1,6 +1,5 @@
 open Core
 open Core_extended
-open Countdown_lib
 
 let letters =
   Char.all
@@ -45,5 +44,3 @@ let command =
     fun () -> main_loop trie
   end
 ;;
-
-let () = Command.run command

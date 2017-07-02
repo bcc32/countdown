@@ -1,6 +1,5 @@
 open Core
 open Core_extended
-open Countdown_lib
 
 (* Calculate all possible results from the given numbers. *)
 let project ns =
@@ -57,5 +56,3 @@ let command =
     return main_loop
   end
 ;;
-
-let () = Command.run command
