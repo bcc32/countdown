@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (words))
-  (public_names (words))
+ ((names (words numbers))
+  (public_names (words numbers))
   (libraries (core core_extended countdown_lib))
   (preprocess (pps (ppx_jane)))))
