@@ -45,7 +45,8 @@ let main_loop () =
       | None -> ()
       | Some target ->
         let target = Int.of_string target in
-        find numbers target
+        find numbers target;
+        loop ()
   in
   loop ()
 ;;
