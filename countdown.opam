@@ -2,11 +2,12 @@ opam-version: "1.2"
 name: "countdown"
 version: "0.3.0"
 maintainer: "Aaron L. Zeng <a2z@bcc32.com>"
-author: "Aaron L. Zeng <a2z@bcc32.com>"
+authors: "Aaron L. Zeng <a2z@bcc32.com>"
 homepage: "https://github.com/bcc32/countdown"
 bug-reports: "https://github.com/bcc32/countdown/issues"
 license: "MIT"
-build: [[ "jbuilder" "build" "-p" name "-j" jobs ]]
+dev-repo: "https://github.com/bcc32/countdown"
+build: ["jbuilder" "build" "-p" name "-j" jobs]
 depends: [
   "core" {build}
   "core_extended" {build}
