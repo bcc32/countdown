@@ -17,7 +17,7 @@ let rec invariant t =
     assert (Option.is_none (List.find_a_dup t.chars ~compare:Char.compare));
     Map.iter t.children ~f:(fun u ->
       invariant u;
-      assert (List.equal u.chars (List.tl_exn t.chars) ~equal:Char.equal));
+      assert (phys_equal u.chars (List.tl_exn t.chars)));
     (* TODO encode this in the type *)
     assert (Map.is_empty t.children || Set.is_empty t.values))
 
