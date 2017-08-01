@@ -2,5 +2,5 @@
 
 (library
  ((name countdown_lib)
-  (libraries (core core_extended))
+  (libraries (core))
   (preprocess (pps (ppx_jane)))))

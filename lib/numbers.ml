@@ -1,5 +1,4 @@
 open Core
-open Core_extended
 
 (* Calculate all possible results from the given numbers. *)
 let project ns =
@@ -36,11 +35,13 @@ let find ns n =
 
 let main_loop () =
   let rec loop () =
-    match Readline.input_line () ~prompt:"numbers> " with
+    print_string "numbers> ";
+    match In_channel.(input_line stdin) with
     | None -> ()
     | Some numbers ->
       let numbers = String.split numbers ~on:' ' |> List.map ~f:Int.of_string in
-      match Readline.input_line () ~prompt:"target> " with
+      print_string "target> ";
+      match In_channel.(input_line stdin) with
       | None -> ()
       | Some target ->
         let target = Int.of_string target in

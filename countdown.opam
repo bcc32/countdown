@@ -10,5 +10,4 @@ dev-repo: "https://github.com/bcc32/countdown"
 build: ["jbuilder" "build" "-p" name "-j" jobs]
 depends: [
   "core" {build}
-  "core_extended" {build}
 ]

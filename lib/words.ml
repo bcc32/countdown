@@ -1,5 +1,4 @@
 open Core
-open Core_extended
 
 let letters =
   Char.all
@@ -20,7 +19,7 @@ let trie_param =
 
 let main_loop trie =
   let rec loop () =
-    match Readline.input_line () with
+    match In_channel.(input_line stdin) with
     | None -> ()
     | Some word ->
       let word = String.lowercase word in
