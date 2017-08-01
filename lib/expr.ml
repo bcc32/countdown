@@ -11,10 +11,10 @@ type t =
 let rec sexp_of_t =
   function
   | Base n -> [%sexp (n : int)]
-  | Plus   (_, a, b) -> [%sexp [(a : t); "+"; (b : t)]]
-  | Minus  (_, a, b) -> [%sexp [(a : t); "-"; (b : t)]]
-  | Times  (_, a, b) -> [%sexp [(a : t); "*"; (b : t)]]
-  | Divide (_, a, b) -> [%sexp [(a : t); "/"; (b : t)]]
+  | Plus   (_, a, b) -> [%sexp ["+"; (a : t); (b : t)]]
+  | Minus  (_, a, b) -> [%sexp ["-"; (a : t); (b : t)]]
+  | Times  (_, a, b) -> [%sexp ["*"; (a : t); (b : t)]]
+  | Divide (_, a, b) -> [%sexp ["/"; (a : t); (b : t)]]
 ;;
 
 let value = function
