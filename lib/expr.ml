@@ -17,7 +17,7 @@ let rec sexp_of_t =
   | Divide (_, a, b) -> [%sexp [(a : t); "/"; (b : t)]]
 ;;
 
-let to_int = function
+let value = function
   | Base    v
   | Plus   (v, _, _)
   | Minus  (v, _, _)
@@ -26,21 +26,22 @@ let to_int = function
 ;;
 
 (* Compare two [t]'s by value *)
-let compare = Comparable.lift Int.compare ~f:to_int
+let compare = Comparable.lift Int.compare ~f:value
 
-let of_int int = Base int
+let literal int = Base int
 
-let plus   a b = Plus   (to_int a + to_int b, a, b)
-let minus  a b = Minus  (to_int a - to_int b, a, b)
-let times  a b = Times  (to_int a * to_int b, a, b)
-let divide a b = Divide (to_int a / to_int b, a, b)
+let plus   a b = Plus   (value a + value b, a, b)
+let minus  a b = Minus  (value a - value b, a, b)
+let times  a b = Times  (value a * value b, a, b)
+let divide a b = Divide (value a / value b, a, b)
 
-let abs_diff a b = if to_int a > to_int b then minus a b else minus b a
+let abs_diff a b = if value a > value b then minus a b else minus b a
 
 let can_divide a b =
-  let a = to_int a in
-  let b = to_int b in
+  let a = value a in
+  let b = value b in
   b <> 0 && a % b = 0
+;;
 
 let all_combinations a b =
   [ plus a b
