@@ -4,21 +4,21 @@ open Core
 let project ns =
   let len = List.length ns in
   let max_mask = 1 lsl len in
-  let candidates = Array.init max_mask (fun _ -> Int.Table.create ()) in
+  let candidates = Array.init max_mask ~f:(fun _ -> Int.Table.create ()) in
   List.iteri ns ~f:(fun i n ->
     let mask = 1 lsl i in
     Hashtbl.set candidates.(mask) ~key:n ~data:(Expr.literal n));
   for mask = 0 to max_mask - 1 do
     Hashtbl.iter candidates.(mask) ~f:(fun expr ->
       List.iteri ns ~f:(fun i n ->
-        if mask land (1 lsl i) = 0 then begin
+        if mask land (1 lsl i) = 0
+        then (
           let new_mask = mask lor (1 lsl i) in
           let new_exprs = Expr.all_combinations expr (Expr.literal n) in
           List.iter new_exprs ~f:(fun expr ->
             Hashtbl.set candidates.(new_mask)
               ~key:(Expr.value expr)
-              ~data:expr)
-        end))
+              ~data:expr))))
   done;
   candidates
 ;;
@@ -51,8 +51,7 @@ let main_loop () =
 ;;
 
 let command =
-  Command.basic' ~summary:"attempt to construct the target number" begin
-    let open Command.Let_syntax in
-    return main_loop
-  end
+  let open Command.Let_syntax in
+  Command.basic' ~summary:"attempt to construct the target number"
+    (return main_loop)
 ;;

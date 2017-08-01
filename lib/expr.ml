@@ -47,14 +47,14 @@ let all_combinations a b =
   [ plus a b
   ; abs_diff a b
   ; times a b ]
-  @ (if can_divide a b then [divide a b] else [])
-  @ (if can_divide b a then [divide b a] else [])
+  @ (if can_divide a b then [ divide a b ] else [])
+  @ (if can_divide b a then [ divide b a ] else [])
   |> List.dedup ~compare
 ;;
 
-include Comparable.Make(struct
+include Comparable.Make (struct
     type nonrec t = t
     let sexp_of_t = sexp_of_t
-    let t_of_sexp = [%of_sexp: opaque]
+    let t_of_sexp = opaque_of_sexp
     let compare = compare
   end)

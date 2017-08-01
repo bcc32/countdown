@@ -16,9 +16,3 @@ val add : t -> string -> t
 (** Sequence of all strings in the one-sided trie that can be constructed using
     the characters in the input string *)
 val to_sequence : t -> string -> string Sequence.t
-
-(** [fold], [iter], etc. produce elements in the same order as [to_sequence] *)
-
-val fold : t -> string -> init:'acc -> f:('acc -> string -> 'acc) -> 'acc
-
-val iter : t -> string -> f:(string -> unit) -> unit

@@ -1,9 +1,6 @@
 open Core
 
-let letters =
-  Char.all
-  |> List.filter ~f:Char.is_lowercase
-;;
+let letters = List.filter [%all: Char.t] ~f:Char.is_lowercase
 
 let trie_param =
   let open Command.Let_syntax in
@@ -13,8 +10,7 @@ let trie_param =
       ~init:(One_sided_trie.create letters)
       ~f:(fun trie word ->
         let word = String.lowercase word in
-        One_sided_trie.add trie word
-      ))
+        One_sided_trie.add trie word))
 ;;
 
 let main_loop trie =
@@ -39,8 +35,7 @@ let main_loop trie =
 
 let command =
   let open Command.Let_syntax in
-  Command.basic' ~summary:"find words in input letters" begin
+  Command.basic' ~summary:"find words in input letters" (
     let%map_open trie = trie_param in
-    fun () -> main_loop trie
-  end
+    fun () -> main_loop trie)
 ;;
