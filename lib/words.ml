@@ -19,6 +19,7 @@ let trie_param =
 
 let main_loop trie =
   let rec loop () =
+    printf "> %!";
     match In_channel.(input_line stdin) with
     | None -> ()
     | Some word ->

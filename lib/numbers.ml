@@ -34,12 +34,12 @@ let find ns n =
 
 let main_loop () =
   let rec loop () =
-    print_string "numbers> ";
+    printf "numbers> %!";
     match In_channel.(input_line stdin) with
     | None -> ()
     | Some numbers ->
       let numbers = String.split numbers ~on:' ' |> List.map ~f:Int.of_string in
-      print_string "target> ";
+      printf "target> %!";
       match In_channel.(input_line stdin) with
       | None -> ()
       | Some target ->
