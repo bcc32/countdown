@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "countdown"
-version: "0.3.0"
+version: "0.3.1"
 maintainer: "Aaron L. Zeng <a2z@bcc32.com>"
 authors: "Aaron L. Zeng <a2z@bcc32.com>"
 homepage: "https://github.com/bcc32/countdown"
