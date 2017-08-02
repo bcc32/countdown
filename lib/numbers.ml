@@ -8,10 +8,13 @@ let project ns =
   List.iteri ns ~f:(fun i n ->
     let mask = 1 lsl i in
     Hashtbl.set candidates.(mask) ~key:n ~data:(Expr.literal n));
+  (* We iterate through all possible masks in increasing order. This is a
+     topologically sorted order since any mask [a] which is a subset of mask [b]
+     has the property [a < b]. *)
   for target_mask = 0 to max_mask - 1 do
     (* [mask_a] and [mask_b] are disjoint submasks of [target_mask] *)
     for mask_a = 0 to target_mask do
-      if mask_a land (lnot target_mask) = 0
+      if mask_a land lnot target_mask = 0
       then (
         let mask_b = target_mask lxor mask_a in
         Hashtbl.iter candidates.(mask_a) ~f:(fun expr_a ->
