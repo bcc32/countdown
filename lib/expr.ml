@@ -25,6 +25,15 @@ let value = function
   | Divide (v, _, _) -> v
 ;;
 
+let invariant t =
+  Invariant.invariant [%here] t [%sexp_of: t] (fun () ->
+    assert (value t >= 0);
+    match t with
+    | Base _ | Plus _ | Times _ -> ()
+    | Minus  (_, a, b) -> assert (value a >= value b)
+    | Divide (_, a, b) -> assert (value a % value b = 0))
+;;
+
 (* Compare two [t]'s by value *)
 let compare = Comparable.lift Int.compare ~f:value
 

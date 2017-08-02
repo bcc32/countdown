@@ -18,3 +18,5 @@ val all_combinations : t -> t -> t list
 (** Expressions compare by value, so two expressions whose results are the same
     but whose structures are different compare equal. *)
 include Comparable.S with type t := t
+
+include Invariant.S with type t := t
