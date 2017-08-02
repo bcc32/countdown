@@ -8,17 +8,20 @@ let project ns =
   List.iteri ns ~f:(fun i n ->
     let mask = 1 lsl i in
     Hashtbl.set candidates.(mask) ~key:n ~data:(Expr.literal n));
-  for mask = 0 to max_mask - 1 do
-    Hashtbl.iter candidates.(mask) ~f:(fun expr ->
-      List.iteri ns ~f:(fun i n ->
-        if mask land (1 lsl i) = 0
-        then (
-          let new_mask = mask lor (1 lsl i) in
-          let new_exprs = Expr.all_combinations expr (Expr.literal n) in
-          List.iter new_exprs ~f:(fun expr ->
-            Hashtbl.set candidates.(new_mask)
-              ~key:(Expr.value expr)
-              ~data:expr))))
+  for target_mask = 0 to max_mask - 1 do
+    (* [mask_a] and [mask_b] are disjoint submasks of [target_mask] *)
+    for mask_a = 0 to target_mask do
+      if mask_a land (lnot target_mask) = 0
+      then (
+        let mask_b = target_mask lxor mask_a in
+        Hashtbl.iter candidates.(mask_a) ~f:(fun expr_a ->
+          Hashtbl.iter candidates.(mask_b) ~f:(fun expr_b ->
+            let new_exprs = Expr.all_combinations expr_a expr_b in
+            List.iter new_exprs ~f:(fun expr ->
+              Hashtbl.set candidates.(target_mask)
+                ~key:(Expr.value expr)
+                ~data:expr))));
+    done
   done;
   candidates
 ;;
