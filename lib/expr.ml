@@ -8,6 +8,8 @@ type t =
   | Times  of int * t * t
   | Divide of int * t * t
 
+(* TODO add pretty to_string *)
+
 let rec sexp_of_t =
   function
   | Base n -> [%sexp (n : int)]
