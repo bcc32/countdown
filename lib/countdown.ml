@@ -1,8 +1,11 @@
-(** Solver for Countdown problems.
+(** Solvers for Countdown problems.
 
     [Countdown] provides useful data structures and routines for solving
     problems on the venerable TV panel show, {e Countdown}. Because anagrams and
     arithmetic are hard.
+
+    This package also provides an executable [countdown], a command-line
+    interface to the solvers.
 
     @author Aaron L. Zeng <me at bcc32 dot com>
 
