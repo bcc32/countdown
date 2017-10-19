@@ -9,7 +9,7 @@
 
     @author Aaron L. Zeng <me at bcc32 dot com>
 
-    @version 0.3.2 *)
+    @version 0.3.3 *)
 
 module Anagram_tree = Anagram_tree
 module Expr         = Expr
