@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (executables
- ((names (countdown))
+ ((names (main))
   (public_names (countdown))
-  (libraries (core countdown_lib))
+  (libraries (core countdown))
   (preprocess (pps (ppx_jane)))))

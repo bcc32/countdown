@@ -1,5 +1,5 @@
 open Core
-open Countdown_lib
+open Countdown
 
 let command =
   Command.group ~summary:"Countdown solver"
