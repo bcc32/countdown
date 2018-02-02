@@ -60,7 +60,7 @@ let all_combinations a b =
   ; times a b ]
   @ (if can_divide a b then [ divide a b ] else [])
   @ (if can_divide b a then [ divide b a ] else [])
-  |> List.dedup ~compare
+  |> List.dedup_and_sort ~compare
 ;;
 
 include Comparable.Make (struct

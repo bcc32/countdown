@@ -58,6 +58,6 @@ let main_loop () =
 
 let command =
   let open Command.Let_syntax in
-  Command.basic' ~summary:"attempt to construct the target number"
+  Command.basic ~summary:"attempt to construct the target number"
     (return main_loop)
 ;;

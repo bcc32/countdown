@@ -35,7 +35,7 @@ let main_loop tree =
 
 let command =
   let open Command.Let_syntax in
-  Command.basic' ~summary:"find words in input letters" (
+  Command.basic ~summary:"find words in input letters" (
     let%map_open tree = tree_param in
     fun () -> main_loop tree)
 ;;

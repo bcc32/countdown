@@ -9,5 +9,5 @@ license: "MIT"
 dev-repo: "https://github.com/bcc32/countdown"
 build: ["jbuilder" "build" "-p" name "-j" jobs]
 depends: [
-  "core" {build}
+  "core" {>= "v0.10" & < "v0.11"}
 ]
