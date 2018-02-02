@@ -4,7 +4,7 @@
     The following operations are permissible: [+], [-], [*], [/]. Only
     non-negative integers are allowed as intermediate results. *)
 
-open Core
+open! Core
 
 (** An expression *)
 type t [@@deriving sexp_of]

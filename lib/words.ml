@@ -1,4 +1,4 @@
-open Core
+open! Core
 
 let letters = List.filter [%all: Char.t] ~f:Char.is_lowercase
 

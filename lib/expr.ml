@@ -1,4 +1,4 @@
-open Core
+open! Core
 
 (* First field is value. *)
 type t =

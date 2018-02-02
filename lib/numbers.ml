@@ -1,4 +1,4 @@
-open Core
+open! Core
 
 (* Calculate all possible results from the given numbers. *)
 let project ns =

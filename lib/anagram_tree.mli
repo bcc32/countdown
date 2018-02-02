@@ -4,7 +4,7 @@
 
     @see <https://en.wikipedia.org/wiki/Anatree> for a similar design. *)
 
-open Core
+open! Core
 
 type t [@@deriving sexp]
 
