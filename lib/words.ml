@@ -2,9 +2,23 @@ open! Core
 
 let letters = List.filter [%all: Char.t] ~f:Char.is_lowercase
 
+let default_dictionary_file =
+  Filename.(
+    of_parts
+      [ dirname Sys.executable_name
+      ; parent_dir_name
+      ; "share"
+      ; "countdown"                     (* FIXME avoid hard-coding this *)
+      ; "dictionary" ])
+;;
+
 let tree_param =
   let open Command.Let_syntax in
-  let%map_open filename = anon ("dictionary-file" %: string) in
+  let%map_open filename =
+    "dictionary-file" %: string
+    |> maybe_with_default default_dictionary_file
+    |> anon
+  in
   In_channel.with_file filename ~f:(fun chan ->
     In_channel.(fold_lines chan)
       ~init:(Anagram_tree.create letters)
