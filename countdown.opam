@@ -1,7 +1,7 @@
 opam-version: "1.2"
 
 name:    "countdown"
-version: "0.3.3"
+version: "0.4.0"
 license: "MIT"
 
 maintainer: "Aaron L. Zeng <me@bcc32.com>"
