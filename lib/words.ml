@@ -35,12 +35,12 @@ let main_loop tree =
     | Some word ->
       let word = String.lowercase word in
       let by_length_desc = Comparable.lift Int.descending ~f:String.length in
-      let cmp = Comparable.lexicographic [ by_length_desc; String.compare ] in
+      let compare = Comparable.lexicographic [ by_length_desc; String.compare ] in
       let results =
         Anagram_tree.to_sequence tree word
         |> Sequence.to_array
       in
-      Array.sort results ~cmp;
+      Array.sort results ~compare;
       printf !"%{sexp: string array}\n%!" results;
       loop ()
   in
