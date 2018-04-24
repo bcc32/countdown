@@ -9,7 +9,7 @@ authors:    "Aaron L. Zeng <me@bcc32.com>"
 
 homepage:    "https://github.com/bcc32/countdown"
 bug-reports: "https://github.com/bcc32/countdown/issues"
-dev-repo:    "git://github.com/bcc32/countdown"
+dev-repo:    "git+https://github.com/bcc32/countdown"
 
 build: ["jbuilder" "build" "-p" name "-j" jobs]
 
