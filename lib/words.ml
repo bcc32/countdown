@@ -20,11 +20,9 @@ let tree_param =
     |> anon
   in
   In_channel.with_file filename ~f:(fun chan ->
-    In_channel.(fold_lines chan)
+    In_channel.fold_lines chan
       ~init:(Anagram_tree.create letters)
-      ~f:(fun tree word ->
-        let word = String.lowercase word in
-        Anagram_tree.add tree word))
+      ~f:(fun tree word -> Anagram_tree.add tree (String.lowercase word)))
 ;;
 
 let main_loop tree =
