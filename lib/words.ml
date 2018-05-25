@@ -8,7 +8,7 @@ let default_dictionary_file =
       [ dirname Sys.executable_name
       ; parent_dir_name
       ; "share"
-      ; "countdown"                     (* FIXME avoid hard-coding this *)
+      ; "%%NAME%%"
       ; "dictionary" ])
 ;;
 

@@ -11,7 +11,10 @@ homepage:    "https://github.com/bcc32/countdown"
 bug-reports: "https://github.com/bcc32/countdown/issues"
 dev-repo:    "git+https://github.com/bcc32/countdown"
 
-build: ["jbuilder" "build" "-p" name "-j" jobs]
+build: [
+  ["jbuilder" "subst"] {pinned}
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
 
 depends: [
   "core" {>= "v0.11" & < "v0.12"}
