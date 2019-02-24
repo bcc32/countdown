@@ -1,0 +1,6 @@
+(library
+ (name countdown)
+ (public_name countdown)
+ (libraries core)
+ (preprocess
+  (pps ppx_jane)))

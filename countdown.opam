@@ -12,8 +12,8 @@ bug-reports: "https://github.com/bcc32/countdown/issues"
 dev-repo:    "git+https://github.com/bcc32/countdown"
 
 build: [
-  ["jbuilder" "subst"] {pinned}
-  ["jbuilder" "build" "-p" name "-j" jobs]
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
 ]
 
 depends: [

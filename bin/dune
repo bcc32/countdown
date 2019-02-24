@@ -1,0 +1,6 @@
+(executables
+ (names main)
+ (public_names countdown)
+ (libraries core countdown)
+ (preprocess
+  (pps ppx_jane)))
