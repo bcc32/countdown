@@ -18,5 +18,5 @@ build: [
 
 depends: [
   "dune" {build & >= "1.0"}
-  "core" {>= "v0.11" & < "v0.12"}
+  "core" {>= "v0.12" & < "v0.13"}
 ]
