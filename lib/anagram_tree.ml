@@ -2,7 +2,7 @@ open! Core
 
 type t =
   { chars    : char list
-  ; children : t Int.Map.t sexp_opaque
+  ; children : t Int.Map.t [@sexp.opaque]
   ; values   : String.Set.t }
 [@@deriving sexp]
 
