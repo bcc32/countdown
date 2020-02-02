@@ -21,9 +21,7 @@ let project ns =
           Hashtbl.iter candidates.(mask_b) ~f:(fun expr_b ->
             let new_exprs = Expr.all_combinations expr_a expr_b in
             List.iter new_exprs ~f:(fun expr ->
-              Hashtbl.set candidates.(target_mask)
-                ~key:(Expr.value expr)
-                ~data:expr))));
+              Hashtbl.set candidates.(target_mask) ~key:(Expr.value expr) ~data:expr))))
     done
   done;
   candidates
@@ -46,18 +44,17 @@ let main_loop () =
     | Some numbers ->
       let numbers = String.split numbers ~on:' ' |> List.map ~f:Int.of_string in
       printf "target> %!";
-      match In_channel.(input_line stdin) with
-      | None -> ()
-      | Some target ->
-        let target = Int.of_string target in
-        find numbers target;
-        loop ()
+      (match In_channel.(input_line stdin) with
+       | None -> ()
+       | Some target ->
+         let target = Int.of_string target in
+         find numbers target;
+         loop ())
   in
   loop ()
 ;;
 
 let command =
   let open Command.Let_syntax in
-  Command.basic ~summary:"attempt to construct the target number"
-    (return main_loop)
+  Command.basic ~summary:"attempt to construct the target number" (return main_loop)
 ;;

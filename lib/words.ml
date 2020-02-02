@@ -5,24 +5,17 @@ let letters = List.filter [%all: Char.t] ~f:Char.is_lowercase
 let default_dictionary_file =
   Filename.(
     of_parts
-      [ dirname Sys.executable_name
-      ; parent_dir_name
-      ; "share"
-      ; "%%NAME%%"
-      ; "dictionary" ])
+      [ dirname Sys.executable_name; parent_dir_name; "share"; "%%NAME%%"; "dictionary" ])
 ;;
 
 let tree_param =
   let open Command.Let_syntax in
   let%map_open filename =
-    "dictionary-file" %: string
-    |> maybe_with_default default_dictionary_file
-    |> anon
+    "dictionary-file" %: string |> maybe_with_default default_dictionary_file |> anon
   in
   In_channel.with_file filename ~f:(fun chan ->
-    In_channel.fold_lines chan
-      ~init:(Anagram_tree.create letters)
-      ~f:(fun tree word -> Anagram_tree.add tree (String.lowercase word)))
+    In_channel.fold_lines chan ~init:(Anagram_tree.create letters) ~f:(fun tree word ->
+      Anagram_tree.add tree (String.lowercase word)))
 ;;
 
 let main_loop tree =
@@ -34,10 +27,7 @@ let main_loop tree =
       let word = String.lowercase word in
       let by_length_desc = Comparable.lift Int.descending ~f:String.length in
       let compare = Comparable.lexicographic [ by_length_desc; String.compare ] in
-      let results =
-        Anagram_tree.to_sequence tree word
-        |> Sequence.to_array
-      in
+      let results = Anagram_tree.to_sequence tree word |> Sequence.to_array in
       Array.sort results ~compare;
       printf !"%{sexp: string array}\n%!" results;
       loop ()
@@ -47,7 +37,8 @@ let main_loop tree =
 
 let command =
   let open Command.Let_syntax in
-  Command.basic ~summary:"find words in input letters" (
-    let%map_open tree = tree_param in
-    fun () -> main_loop tree)
+  Command.basic
+    ~summary:"find words in input letters"
+    (let%map_open tree = tree_param in
+     fun () -> main_loop tree)
 ;;

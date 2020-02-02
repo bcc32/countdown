@@ -12,6 +12,6 @@
     @version 0.3.3 *)
 
 module Anagram_tree = Anagram_tree
-module Expr         = Expr
-module Numbers      = Numbers
-module Words        = Words
+module Expr = Expr
+module Numbers = Numbers
+module Words = Words
